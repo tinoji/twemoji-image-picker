@@ -4,17 +4,21 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build-macOS": "electron-packager . desktop-twemoji-picker --platform=darwin --arch=x64 --overwrite --out dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "emoji.json": "^12.1.0",
+    "electron-dl": "^1.14.0"
+  },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
     "electron": "^5.0.5",
-    "electron-dl": "^1.14.0",
-    "emoji.json": "^12.1.0",
-    "eslint-plugin-eslint-comments": "^3.1.2",
-    "twemoji": "^12.0.4"
+    "electron-packager": "^14.0.0",
+    "eslint-plugin-eslint-comments": "^3.1.2"
   }
 }

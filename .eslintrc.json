@@ -13,9 +13,28 @@
     "env": {
         "browser": true,
         "es6": true,
-        "commonjs" : true,
+        "commonjs": true,
         "node": true
     },
     "globals": {},
-    "rules": {}
+    "rules": {
+        "semi": [
+            "error",
+            "always"
+        ],
+        "semi-spacing": [
+            "error",
+            {
+                "after": true,
+                "before": false
+            }
+        ],
+        "semi-style": [
+            "error",
+            "last"
+        ],
+        "no-extra-semi": "error",
+        "no-unexpected-multiline": "error",
+        "no-unreachable": "error"
+    }
 }

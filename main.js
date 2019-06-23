@@ -1,13 +1,14 @@
+"use strict";
 const { app, Menu, BrowserWindow, ipcMain, nativeImage, clipboard } = require('electron');
+const { download } = require('electron-dl');
 const path = require('path');
 const fs = require('fs');
 const url = require('url');
-const { download } = require('electron-dl');
 
 // TODO: fix 
-const tmpDir = "/tmp/twemoji"
-const tmpFilename = "tmp.png"
-const tmpFilepath = tmpDir + "/" + tmpFilename
+const tmpDir = "/tmp/twemoji";
+const tmpFilename = "tmp.png";
+const tmpFilepath = tmpDir + "/" + tmpFilename;
 
 let mainWindow;
 
@@ -58,13 +59,13 @@ ipcMain.on('download', async (event, url) => {
 });
 
 ipcMain.on('copy', () => {
-    let img = nativeImage.createFromPath(tmpFilepath)
-    clipboard.writeImage(img)
-})
+    let img = nativeImage.createFromPath(tmpFilepath);
+    clipboard.writeImage(img);
+});
 
 ipcMain.on('ondragstart', (event) => {
     event.sender.startDrag({
         file: tmpFilepath,
         icon: tmpFilepath
-    })
-})
+    });
+});
