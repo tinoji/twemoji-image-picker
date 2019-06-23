@@ -1,0 +1,21 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:eslint-comments/recommended"
+    ],
+    "plugins": [
+        "eslint-comments"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true,
+        "es6": true,
+        "commonjs" : true,
+        "node": true
+    },
+    "globals": {},
+    "rules": {}
+}

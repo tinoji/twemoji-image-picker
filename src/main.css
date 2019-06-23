@@ -1,0 +1,9 @@
+img.emoji {
+    height: 1.5em;
+    width: 1.5em;
+    margin: 0.2em 0.5em;
+    vertical-align: -0.1em;
+    cursor: copy;
+}
+
+/* TODO: dragging cusor */
