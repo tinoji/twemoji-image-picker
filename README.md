@@ -1,7 +1,9 @@
-# desktop-twemoji-picker
+# twemoji-image-picker
 
 ## TODO
 - [ ] search
 - [ ] category
 - [ ] design
-- [ ] svg 
+- [ ] surrogate pair 
+- [ ] fix tmp dir
+- [ ] mouse over
