@@ -16,7 +16,9 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         webPreferences: { nodeIntegration: true },
         width: 800,
-        height: 600
+        height: 600,
+        transparent: true,
+        frame: false
     });
 
     mainWindow.loadURL(url.format({

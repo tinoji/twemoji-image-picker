@@ -1,5 +1,5 @@
 "use strict";
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, remote } = require('electron');
 const emoji = require('emoji.json');
 
 const parser = new DOMParser();
@@ -12,6 +12,12 @@ let contents = document.getElementById("contents");
 contents.innerHTML = doc.body.innerText;
 twemoji.parse(contents);
 addEventlisteners();
+
+// 
+document.getElementById("close-btn").addEventListener("click", function (e) {
+    let window = remote.getCurrentWindow();
+    window.close();
+}); 
 
 // TODO: fix
 function search() {
