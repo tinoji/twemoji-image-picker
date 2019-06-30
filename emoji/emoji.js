@@ -13,7 +13,7 @@ contents.innerHTML = doc.body.innerText;
 twemoji.parse(contents);
 addEventlisteners();
 
-// 
+// close button 
 document.getElementById("close-btn").addEventListener("click", function (e) {
     let window = remote.getCurrentWindow();
     window.close();

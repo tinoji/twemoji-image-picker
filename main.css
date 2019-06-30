@@ -7,14 +7,14 @@ img.emoji {
 }
 
 img.emoji:hover {
-    background-color: #afeeee;
+    background-color: #c0c0c0;
     border-radius: 0.3em;
 }
 
 body {
     -webkit-app-region: drag;
     -webkit-user-select: none;
-    background-color: rgba(233, 233, 233, 0.8);
+    background-color: rgba(233, 233, 233, 0.9);
     margin: 3px 6px;
 }
 
