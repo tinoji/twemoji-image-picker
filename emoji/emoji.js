@@ -11,9 +11,9 @@ let doc = parser.parseFromString(sourceString, "text/html");
 let contents = document.getElementById("contents");
 contents.innerHTML = doc.body.innerText;
 twemoji.parse(contents);
-
 addEventlisteners();
 
+// TODO: fix
 function search() {
     const query = document.getElementById("search-query");
     const regex = new RegExp(query.value)

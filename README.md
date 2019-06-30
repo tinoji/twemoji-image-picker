@@ -1,9 +1,8 @@
 # twemoji-image-picker
 
 ## TODO
-- [ ] search
+- [x] search
 - [ ] category
 - [ ] design
 - [ ] surrogate pair 
 - [ ] fix tmp dir
-- [ ] mouse over
