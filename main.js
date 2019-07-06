@@ -1,14 +1,16 @@
-"use strict";
+'use strict';
 const { app, Menu, BrowserWindow, ipcMain, nativeImage, clipboard } = require('electron');
 const { download } = require('electron-dl');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 const url = require('url');
 
-// TODO: fix 
-const tmpDir = "/tmp/twemoji";
-const tmpFilename = "tmp.png";
-const tmpFilepath = tmpDir + "/" + tmpFilename;
+const tmpDir = os.tmpdir() + '/twemoji'; // FIXME
+const tmpFilename = 'tmp.png';
+const tmpFilepath = tmpDir + '/' + tmpFilename;
+
+global.shared = {tmpFilepath: tmpFilepath};
 
 let mainWindow;
 

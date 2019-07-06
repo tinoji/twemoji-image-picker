@@ -2,6 +2,8 @@
 const { ipcRenderer, remote } = require('electron');
 const emoji = require('emoji.json');
 
+const tmpFilepath = remote.getGlobal('shared').tmpFilepath;
+
 show();
 
 // close button 
@@ -42,7 +44,7 @@ function addEventlisteners() {
             ipcRenderer.send('copy');
             new Notification('Copied to clipboard!', {
                 silent: true,
-                icon: '/tmp/twemoji/tmp.png'
+                icon: tmpFilepath 
             });
         };
 
