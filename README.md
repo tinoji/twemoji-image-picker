@@ -2,9 +2,9 @@
 
 ## TODO
 - [x] search
+- [x] emoji name at hover
 - [ ] category
 - [ ] design
-- [ ] surrogate pair 
 - [ ] fix tmp dir
 
 ## Licenses 
