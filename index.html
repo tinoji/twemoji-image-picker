@@ -9,14 +9,15 @@
 </head>
 
 <body>
-    <img id="close-btn" src="assets/close.svg">
-
-    <div id="search">
-        <input id="search-query" type="text" placeholder="Search" oninput="show();">
+    <div class="title-bar">
+        <img class="close-btn" src="assets/close.svg">
     </div>
-    <div id="contents"></div>
 
-    <script src="emoji/emoji.js"></script>
+    <div class="main-container">
+        <input id="search-query" type="text" placeholder="Search" oninput="show();">
+        <div id="contents"></div>
+        <script src="emoji/emoji.js"></script>
+    </div>
 </body>
 
 </html>

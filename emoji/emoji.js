@@ -19,7 +19,7 @@ function show() {
     }
 
     const query = document.getElementById('search-query');
-    const regex = new RegExp(query.value)
+    const regex = new RegExp(query.value);
 
     emoji
         .filter((el) => (el['codes'].match(/ /) == null)) // exclude surrogate pair
@@ -29,7 +29,7 @@ function show() {
             dom.textContent = twemoji.convert.fromCodePoint(el['codes']);
             dom.title = el['name'];
             contents.appendChild(dom);
-        })
+        });
 
     twemoji.parse(contents);
     addEventlisteners();

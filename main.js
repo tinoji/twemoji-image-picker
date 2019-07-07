@@ -17,11 +17,17 @@ let mainWindow;
 function createWindow() {
     mainWindow = new BrowserWindow({
         webPreferences: { nodeIntegration: true },
-        width: 800,
-        height: 600,
+        // width: 1000,
+        // height: 800,
+
+        width: 316,
+        height: 380,
+        // titleBarStyle: 'hidden-inset' // Mac only?
         transparent: true,
         frame: false
     });
+
+    // mainWindow.webContents.openDevTools();
 
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
