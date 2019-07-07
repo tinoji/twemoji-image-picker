@@ -24,6 +24,8 @@ Download one that suit to your platform from [Releases](https://github.com/tinoj
   - Not necessary for me :wink:
 - Surrogate pair emoji
   - Not necessary for me :v:
+- Windows
+  - Not verification yet. Comming soon.
 
 <br>
 
