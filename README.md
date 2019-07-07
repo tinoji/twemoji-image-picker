@@ -1,7 +1,12 @@
 # twemoji-image-picker
 
+![output](https://user-images.githubusercontent.com/10938548/60769365-b7169980-a109-11e9-99d7-c6f7a6ec1688.gif)
+
+## Description
+
 
 ## Installation
+
 
 ## Not Supported
 - Category
