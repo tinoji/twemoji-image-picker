@@ -1,4 +1,5 @@
 'use strict';
+
 const { ipcRenderer, remote } = require('electron');
 const emoji = require('emoji.json');
 const tmpFilepath = remote.getGlobal('shared').tmpFilepath;
