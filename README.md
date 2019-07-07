@@ -2,16 +2,26 @@
 
 ![output](https://user-images.githubusercontent.com/10938548/60769365-b7169980-a109-11e9-99d7-c6f7a6ec1688.gif)
 
-## Description
+[Emoji](https://en.wikipedia.org/wiki/Emoji) is one of the most excellent invention since the dawn of history. It makes us to express our emotion visually and intuitively :heart_eyes:
 
+I love to use emoji in my presentation slides. However, emoji provided by companies has licensing problems :tired_face: For example, App Store Review Guidelines by Apple prohibit developers from use Apple Color Emoji in applications. I keep in mind to avoid to use such emoji even in slides...
+
+But never mind! We have [Twemoji](https://github.com/twitter/twemoji) licensed under CC-BY 4.0! :clap:
+
+twemoji-image-picker is an application like Mac's built-in emoji keyboard for twemoji. Have a happy emoji days :wave:
+
+<br>
 
 ## Installation
 
+
+<br>
 
 ## Not Supported
 - Category
 - Surrogate pair emoji
 
+<br>
 
 ## Licenses 
 Code licensed under the [MIT License](https://opensource.org/licenses/MIT)
