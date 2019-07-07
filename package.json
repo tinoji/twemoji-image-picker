@@ -6,9 +6,8 @@
   "scripts": {
     "eslint": "eslint .",
     "start": "electron .",
-    "build-mac": "electron-packager . twemoji-image-picker --platform=darwin --arch=x64 --overwrite --out dist",
-    "build-win": "electron-packager . twemoji-image-picker --platform=win32 --arch=x64 --overwrite --out dist",
-    "build": "electron-packager . twemoji-image-picker --platform=darwin,win32 --arch=x64 --overwrite --out dist"
+    "build-mac": "electron-packager . twemoji-image-picker --platform=darwin --arch=x64 --icon=icon/icon.icns --overwrite --out dist",
+    "build-win": "electron-packager . twemoji-image-picker --platform=win32 --arch=x64 --icon=icon/icon.icns --overwrite --out dist"
   },
   "keywords": ["emoji", "picker", "electron"],
   "author": "Hiroaki Kikuchi (https://github.com/tinoji)",

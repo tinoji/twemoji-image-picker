@@ -1,18 +1,11 @@
 # twemoji-image-picker
 
 
-
-
 ## Installation
-Release
-
-or...
 
 ## Not Supported
 - Category
-  - I don't need it
 - Surrogate pair emoji
-  - I don't need it
 
 
 ## Licenses 
