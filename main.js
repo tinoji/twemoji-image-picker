@@ -9,7 +9,6 @@ const url = require('url');
 const tmpDir = os.tmpdir() + '/twemoji'; // FIXME
 const tmpFilename = 'tmp.png';
 const tmpFilepath = tmpDir + '/' + tmpFilename;
-
 global.shared = {tmpFilepath: tmpFilepath};
 
 let mainWindow;
@@ -17,17 +16,11 @@ let mainWindow;
 function createWindow() {
     mainWindow = new BrowserWindow({
         webPreferences: { nodeIntegration: true },
-        // width: 1000,
-        // height: 800,
-
         width: 316,
-        height: 380,
-        // titleBarStyle: 'hidden-inset' // Mac only?
+        height: 386,
         transparent: true,
         frame: false
     });
-
-    // mainWindow.webContents.openDevTools();
 
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),

@@ -1,7 +1,6 @@
 'use strict';
 const { ipcRenderer, remote } = require('electron');
 const emoji = require('emoji.json');
-
 const tmpFilepath = remote.getGlobal('shared').tmpFilepath;
 
 show();
@@ -42,7 +41,8 @@ function addEventlisteners() {
             event.preventDefault();
             ipcRenderer.sendSync('download', el.src);
             ipcRenderer.send('copy');
-            new Notification('Copied to clipboard!', {
+            new Notification('twemoji-image-picker', {
+                body: 'Copied to clipboard!',
                 silent: true,
                 icon: tmpFilepath 
             });

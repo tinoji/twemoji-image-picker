@@ -4,9 +4,10 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "build-macOS": "electron-packager . desktop-twemoji-picker --platform=darwin --arch=x64 --overwrite --out dist"
+    "eslint": "npx eslint .",
+    "start": "npx electron .",
+    "build-mac": "electron-packager . twemoji-image-picker --platform=darwin --arch=x64 --overwrite --out dist",
+    "build-win": "electron-packager . twemoji-image-picker --platform=win32 --arch=x64 --overwrite --out dist"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "babel-eslint": "^10.0.2",
     "electron": "^5.0.5",
     "electron-packager": "^14.0.0",
+    "electron-webpack": "^2.7.2",
     "eslint-plugin-eslint-comments": "^3.1.2"
   }
 }
