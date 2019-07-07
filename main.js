@@ -20,7 +20,8 @@ function createWindow() {
         width: 316,
         height: 386,
         transparent: true,
-        frame: false
+        frame: false,
+        icon: path.join(__dirname, 'icon/icon.icns')
     });
 
     mainWindow.loadURL(url.format({
