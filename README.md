@@ -20,7 +20,12 @@ Download one that suit to your platform from [Releases](https://github.com/tinoj
 <br>
 
 ## Not Supported
-- Category
+- SVG or bigger PNG
+  - Comming soon.
+  - Default [72x72](https://github.com/twitter/twemoji/tree/master/assets/72x72) PNG is used for now.
+- For Windows
+  - Not verification yet. Comming soon.
+- Category and Frequentry used feature
   - Not necessary for me :wink:
 - Surrogate pair emoji
   - Not necessary for me :v:
