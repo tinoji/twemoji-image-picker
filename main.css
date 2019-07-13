@@ -64,13 +64,13 @@ input {
 }
 
 #search-input {
-    width: 55%;
+    width: 60%;
     margin-left: 4px;
 }
 
 #png-size-input {
     width: 20%;
-    margin-left: 24px;
+    margin-left: 14px;
 }
 
 #png-size-unit {
