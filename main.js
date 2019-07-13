@@ -4,21 +4,27 @@ const { app, Menu, BrowserWindow, ipcMain, nativeImage, clipboard } = require('e
 const { download } = require('electron-dl');
 const path = require('path');
 const fs = require('fs');
+const pnfs = require("pn/fs");
 const os = require('os');
 const url = require('url');
+const svg2png = require("svg2png");
 
 const tmpDir = os.tmpdir() + '/twemoji-image-picker';
-const tmpFilename = 'tmp.png';
+const tmpFilename = 'tmp.svg'; // FIXME
 const tmpFilepath = tmpDir + '/' + tmpFilename;
-global.shared = {tmpFilepath: tmpFilepath};
+global.shared = { tmpFilepath: tmpFilepath, tmpDir: tmpDir };
 
 let mainWindow;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
         webPreferences: { nodeIntegration: true },
-        width: 316,
-        height: 386,
+        // width: 316,
+        // height: 386,
+
+        width: 900,
+        height: 900,
+
         transparent: true,
         frame: false,
         icon: path.join(__dirname, 'icon/icon.icns')
@@ -29,6 +35,9 @@ function createWindow() {
         protocol: 'file:',
         slashes: true
     }));
+
+    // dev
+    mainWindow.webContents.openDevTools();
 
     Menu.setApplicationMenu(null);
 
@@ -60,11 +69,17 @@ ipcMain.on('download', async (event, url) => {
         directory: tmpDir,
         filename: tmpFilename
     });
+
+    // TODO: loading animation
+    const file = await pnfs.readFile(tmpFilepath);
+    const outputBuffer = await svg2png(file, { width: 300, height: 300 }); // TODO: size
+    await pnfs.writeFile(tmpDir + '/dest.png', outputBuffer);
+
     event.returnValue = 'pong';
 });
 
 ipcMain.on('copy', () => {
-    let img = nativeImage.createFromPath(tmpFilepath);
+    const img = nativeImage.createFromPath(tmpDir + '/dest.png');
     clipboard.writeImage(img);
 });
 

@@ -2,15 +2,15 @@
 
 const { ipcRenderer, remote } = require('electron');
 const emoji = require('emoji.json');
-const tmpFilepath = remote.getGlobal('shared').tmpFilepath;
+const shared = remote.getGlobal('shared');
+const tmpFilepath = shared.tmpFilepath;
 
 show();
 
-// close button 
 document.getElementById('close-btn').addEventListener('click', function (e) {
     let window = remote.getCurrentWindow();
     window.close();
-}); 
+});
 
 function show() {
     let contents = document.getElementById('contents');
@@ -31,7 +31,11 @@ function show() {
             contents.appendChild(dom);
         });
 
-    twemoji.parse(contents);
+    twemoji.parse(contents, {
+        folder: 'svg',
+        ext: '.svg'
+    });
+
     addEventlisteners();
 }
 
@@ -42,10 +46,11 @@ function addEventlisteners() {
             event.preventDefault();
             ipcRenderer.sendSync('download', el.src);
             ipcRenderer.send('copy');
+
             new Notification('twemoji-image-picker', {
                 body: 'Copied to clipboard!',
                 silent: true,
-                icon: tmpFilepath 
+                icon: tmpFilepath
             });
         };
 
