@@ -42,23 +42,54 @@ function show() {
 function addEventlisteners() {
     const emojis = Array.from(document.getElementsByClassName('emoji'));
     emojis.map((el) => {
-        el.onclick = (event) => {
+        el.onclick = async (event) => {
             event.preventDefault();
-            ipcRenderer.sendSync('download', el.src);
-            ipcRenderer.send('copy');
+
+            displayLoading(el);
+            await sleep(0); // hmm...
+            ipcRenderer.sendSync('download', el.src, el);
+            await sleep(0)
+            hideLoading(el);
 
             new Notification('twemoji-image-picker', {
                 body: 'Copied to clipboard!',
-                silent: true,
-                icon: tmpFilepath
+                silent: true
+                // icon: tmpFilepath
             });
-        };
-
-        el.draggable = true;
-        el.ondragstart = (event) => {
-            event.preventDefault();
-            ipcRenderer.sendSync('download', el.src);
-            ipcRenderer.send('ondragstart');
         };
     });
 }
+
+
+function displayLoading(el) {
+    const rect = el.getBoundingClientRect();
+    const x = rect.left + window.pageXOffset - 14;
+    const y = rect.top + window.pageYOffset - 14;
+
+    let loading = document.getElementById('loading');
+    loading.style.left = x + 'px';
+    loading.style.top = y + 'px';
+    loading.style.display = 'inline-block';
+
+    let overlay = document.getElementById('overlay')
+    overlay.style.display = 'inline-block'
+
+    el.style.zIndex = '3';
+    el.style.backgroundColor = 'rgba(233, 233, 233, 1)';
+}
+
+function hideLoading(el) {
+    let loading = document.getElementById('loading');
+    loading.style.display = 'none';
+
+    let overlay = document.getElementById('overlay')
+    overlay.style.display = 'none'
+
+    el.style.zIndex = null;
+    el.style.backgroundColor = null;
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+

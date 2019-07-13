@@ -12,6 +12,7 @@ const svg2png = require("svg2png");
 const tmpDir = os.tmpdir() + '/twemoji-image-picker';
 const tmpFilename = 'tmp.svg'; // FIXME
 const tmpFilepath = tmpDir + '/' + tmpFilename;
+// TODO: png path
 global.shared = { tmpFilepath: tmpFilepath, tmpDir: tmpDir };
 
 let mainWindow;
@@ -19,11 +20,11 @@ let mainWindow;
 function createWindow() {
     mainWindow = new BrowserWindow({
         webPreferences: { nodeIntegration: true },
-        // width: 316,
-        // height: 386,
+        width: 316,
+        height: 386,
 
-        width: 900,
-        height: 900,
+        // width: 900,
+        // height: 900,
 
         transparent: true,
         frame: false,
@@ -37,7 +38,7 @@ function createWindow() {
     }));
 
     // dev
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
     Menu.setApplicationMenu(null);
 
@@ -70,22 +71,12 @@ ipcMain.on('download', async (event, url) => {
         filename: tmpFilename
     });
 
-    // TODO: loading animation
     const file = await pnfs.readFile(tmpFilepath);
     const outputBuffer = await svg2png(file, { width: 300, height: 300 }); // TODO: size
     await pnfs.writeFile(tmpDir + '/dest.png', outputBuffer);
 
-    event.returnValue = 'pong';
-});
-
-ipcMain.on('copy', () => {
     const img = nativeImage.createFromPath(tmpDir + '/dest.png');
     clipboard.writeImage(img);
-});
 
-ipcMain.on('ondragstart', (event) => {
-    event.sender.startDrag({
-        file: tmpFilepath,
-        icon: tmpFilepath
-    });
+    event.returnValue = 'pong';
 });
