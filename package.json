@@ -9,7 +9,11 @@
     "build-mac": "electron-packager . twemoji-image-picker --platform=darwin --arch=x64 --icon=icon/icon.icns --overwrite --out dist",
     "build-win": "electron-packager . twemoji-image-picker --platform=win32 --arch=x64 --icon=icon/icon.icns --overwrite --out dist"
   },
-  "keywords": ["emoji", "picker", "electron"],
+  "keywords": [
+    "emoji",
+    "picker",
+    "electron"
+  ],
   "author": "Hiroaki Kikuchi (https://github.com/tinoji)",
   "license": "MIT",
   "dependencies": {
@@ -18,8 +22,8 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
-    "electron": "^5.0.5",
-    "electron-packager": "^14.0.0",
+    "electron": "^5.0.6",
+    "electron-packager": "^14.0.1",
     "eslint-plugin-eslint-comments": "^3.1.2"
   }
 }
