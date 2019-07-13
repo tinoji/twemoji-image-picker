@@ -1,6 +1,6 @@
 # twemoji-image-picker
 
-![output](https://user-images.githubusercontent.com/10938548/60769365-b7169980-a109-11e9-99d7-c6f7a6ec1688.gif)
+![demo](https://user-images.githubusercontent.com/10938548/61174002-a2d50f80-a5d5-11e9-91be-09242b2e8070.gif)
 
 <br>
 
@@ -20,9 +20,6 @@ Download one that suit to your platform from [Releases](https://github.com/tinoj
 <br>
 
 ## Not Supported
-- SVG or bigger PNG
-  - Comming soon.
-  - Default [72x72](https://github.com/twitter/twemoji/tree/master/assets/72x72) PNG is used for now.
 - For Windows
   - Not verification yet. Comming soon.
 - Category and Frequentry used feature

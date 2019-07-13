@@ -3,22 +3,28 @@
 const { app, Menu, BrowserWindow, ipcMain, nativeImage, clipboard } = require('electron');
 const { download } = require('electron-dl');
 const path = require('path');
-const fs = require('fs');
+const pnfs = require("pn/fs");
 const os = require('os');
 const url = require('url');
+const svg2png = require("svg2png");
 
 const tmpDir = os.tmpdir() + '/twemoji-image-picker';
-const tmpFilename = 'tmp.png';
-const tmpFilepath = tmpDir + '/' + tmpFilename;
-global.shared = {tmpFilepath: tmpFilepath};
+const svgFilename = 'twemoji.svg';
+const pngFilename = 'twemoji.png';
+const svgFilepath = tmpDir + '/' + svgFilename;
+const pngFilepath = tmpDir + '/' + pngFilename;
 
 let mainWindow;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
         webPreferences: { nodeIntegration: true },
-        width: 316,
+        width: 302,
         height: 386,
+
+        // width: 900,
+        // height: 900,
+
         transparent: true,
         frame: false,
         icon: path.join(__dirname, 'icon/icon.icns')
@@ -30,12 +36,11 @@ function createWindow() {
         slashes: true
     }));
 
+    // mainWindow.webContents.openDevTools();
+
     Menu.setApplicationMenu(null);
 
     mainWindow.on('closed', () => {
-        if (fs.existsSync(tmpFilepath)) {
-            fs.unlink(tmpFilepath, () => { /* nothin to do */ });
-        }
         mainWindow = null;
     });
 }
@@ -54,23 +59,19 @@ app.on('activate', () => {
     }
 });
 
-ipcMain.on('download', async (event, url) => {
+ipcMain.on('download', async (event, url, svgOptions) => {
     const win = BrowserWindow.getFocusedWindow();
     await download(win, url, {
         directory: tmpDir,
-        filename: tmpFilename
+        filename: svgFilename
     });
-    event.returnValue = 'pong';
-});
 
-ipcMain.on('copy', () => {
-    let img = nativeImage.createFromPath(tmpFilepath);
+    const file = await pnfs.readFile(svgFilepath);
+    const outputBuffer = await svg2png(file, svgOptions);
+    await pnfs.writeFile(pngFilepath, outputBuffer);
+
+    const img = nativeImage.createFromPath(pngFilepath);
     clipboard.writeImage(img);
-});
 
-ipcMain.on('ondragstart', (event) => {
-    event.sender.startDrag({
-        file: tmpFilepath,
-        icon: tmpFilepath
-    });
+    event.returnValue = 'pong';
 });
