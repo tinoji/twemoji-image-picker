@@ -20,6 +20,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: rgba(233, 233, 233, 1);
+    z-index: 5;
 }
 
 #close-btn {
@@ -47,8 +48,7 @@ body {
     margin: 32px 6px 0 6px;
 }
 
-#search-query {
-    width: 95%;
+input {
     box-sizing: border-box;
     padding: 0.2em 0.4em;
     margin-bottom: 4px;
@@ -61,6 +61,22 @@ body {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+#search-input {
+    width: 55%;
+    margin-left: 4px;
+}
+
+#png-size-input {
+    width: 20%;
+    margin-left: 24px;
+}
+
+#png-size-unit {
+    margin-left: 2px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 img.emoji {

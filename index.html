@@ -13,11 +13,24 @@
         <img id="close-btn" src="assets/close.svg">
     </div>
 
-    <div id="loading" class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div id="loading" class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
     <div id="overlay"></div>
 
     <div class="main-container">
-        <input id="search-query" type="text" placeholder="Search" oninput="show();">
+        <input id="search-input" type="text" placeholder="Search" oninput="show();">
+        <!-- TODO: only numeric and limit range -->
+        <input id="png-size-input" type="text" value="256">
+        <span id="png-size-unit">px</span>
         <div id="contents"></div>
         <script src="./renderer.js"></script>
     </div>

@@ -3,24 +3,23 @@
 const { app, Menu, BrowserWindow, ipcMain, nativeImage, clipboard } = require('electron');
 const { download } = require('electron-dl');
 const path = require('path');
-const fs = require('fs');
 const pnfs = require("pn/fs");
 const os = require('os');
 const url = require('url');
 const svg2png = require("svg2png");
 
 const tmpDir = os.tmpdir() + '/twemoji-image-picker';
-const tmpFilename = 'tmp.svg'; // FIXME
-const tmpFilepath = tmpDir + '/' + tmpFilename;
-// TODO: png path
-global.shared = { tmpFilepath: tmpFilepath, tmpDir: tmpDir };
+const svgFilename = 'twemoji.svg';
+const pngFilename = 'twemoji.png';
+const svgFilepath = tmpDir + '/' + svgFilename;
+const pngFilepath = tmpDir + '/' + pngFilename;
 
 let mainWindow;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
         webPreferences: { nodeIntegration: true },
-        width: 316,
+        width: 302,
         height: 386,
 
         // width: 900,
@@ -37,15 +36,11 @@ function createWindow() {
         slashes: true
     }));
 
-    // dev
     // mainWindow.webContents.openDevTools();
 
     Menu.setApplicationMenu(null);
 
     mainWindow.on('closed', () => {
-        if (fs.existsSync(tmpFilepath)) {
-            fs.unlink(tmpFilepath, () => { /* nothin to do */ });
-        }
         mainWindow = null;
     });
 }
@@ -64,18 +59,18 @@ app.on('activate', () => {
     }
 });
 
-ipcMain.on('download', async (event, url) => {
+ipcMain.on('download', async (event, url, svgOptions) => {
     const win = BrowserWindow.getFocusedWindow();
     await download(win, url, {
         directory: tmpDir,
-        filename: tmpFilename
+        filename: svgFilename
     });
 
-    const file = await pnfs.readFile(tmpFilepath);
-    const outputBuffer = await svg2png(file, { width: 300, height: 300 }); // TODO: size
-    await pnfs.writeFile(tmpDir + '/dest.png', outputBuffer);
+    const file = await pnfs.readFile(svgFilepath);
+    const outputBuffer = await svg2png(file, svgOptions);
+    await pnfs.writeFile(pngFilepath, outputBuffer);
 
-    const img = nativeImage.createFromPath(tmpDir + '/dest.png');
+    const img = nativeImage.createFromPath(pngFilepath);
     clipboard.writeImage(img);
 
     event.returnValue = 'pong';

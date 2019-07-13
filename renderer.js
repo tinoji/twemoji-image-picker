@@ -2,12 +2,10 @@
 
 const { ipcRenderer, remote } = require('electron');
 const emoji = require('emoji.json');
-const shared = remote.getGlobal('shared');
-const tmpFilepath = shared.tmpFilepath;
 
 show();
 
-document.getElementById('close-btn').addEventListener('click', function (e) {
+document.getElementById('close-btn').addEventListener('click', () => {
     let window = remote.getCurrentWindow();
     window.close();
 });
@@ -18,7 +16,7 @@ function show() {
         contents.removeChild(contents.firstChild);
     }
 
-    const query = document.getElementById('search-query');
+    const query = document.getElementById('search-input');
     const regex = new RegExp(query.value);
 
     emoji
@@ -42,24 +40,24 @@ function show() {
 function addEventlisteners() {
     const emojis = Array.from(document.getElementsByClassName('emoji'));
     emojis.map((el) => {
-        el.onclick = async (event) => {
+        el.addEventListener('click', async (event) => {
             event.preventDefault();
 
             displayLoading(el);
             await sleep(0); // hmm...
-            ipcRenderer.sendSync('download', el.src, el);
-            await sleep(0)
+            const size = parseInt(document.getElementById('png-size-input').value);
+            const svgOptions = { width: size, height: size };
+            ipcRenderer.sendSync('download', el.src, svgOptions);
+            await sleep(0);
             hideLoading(el);
 
             new Notification('twemoji-image-picker', {
-                body: 'Copied to clipboard!',
+                body: 'Copied PNG image to clipboard!',
                 silent: true
-                // icon: tmpFilepath
             });
-        };
+        });
     });
 }
-
 
 function displayLoading(el) {
     const rect = el.getBoundingClientRect();
@@ -71,8 +69,8 @@ function displayLoading(el) {
     loading.style.top = y + 'px';
     loading.style.display = 'inline-block';
 
-    let overlay = document.getElementById('overlay')
-    overlay.style.display = 'inline-block'
+    let overlay = document.getElementById('overlay');
+    overlay.style.display = 'inline-block';
 
     el.style.zIndex = '3';
     el.style.backgroundColor = 'rgba(233, 233, 233, 1)';
@@ -82,8 +80,8 @@ function hideLoading(el) {
     let loading = document.getElementById('loading');
     loading.style.display = 'none';
 
-    let overlay = document.getElementById('overlay')
-    overlay.style.display = 'none'
+    let overlay = document.getElementById('overlay');
+    overlay.style.display = 'none';
 
     el.style.zIndex = null;
     el.style.backgroundColor = null;
@@ -92,4 +90,3 @@ function hideLoading(el) {
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
