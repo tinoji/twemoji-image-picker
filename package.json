@@ -17,8 +17,9 @@
   "author": "Hiroaki Kikuchi (https://github.com/tinoji)",
   "license": "MIT",
   "dependencies": {
+    "electron-dl": "^1.14.0",
     "emoji.json": "^12.1.0",
-    "electron-dl": "^1.14.0"
+    "svg2png": "^4.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
