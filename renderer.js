@@ -42,19 +42,29 @@ function addEventlisteners() {
     emojis.map((el) => {
         el.addEventListener('click', async (event) => {
             event.preventDefault();
-
             displayLoading(el);
-            await sleep(0); // hmm...
-            const size = parseInt(document.getElementById('png-size-input').value);
-            const svgOptions = { width: size, height: size };
-            ipcRenderer.sendSync('download', el.src, svgOptions);
-            await sleep(0);
-            hideLoading(el);
+            await sleep(0); // FIXME: hmm...
 
-            new Notification('twemoji-image-picker', {
-                body: 'Copied PNG image to clipboard!',
-                silent: true
-            });
+            const v = parseInt(document.getElementById('png-size-input').value);
+            if (!/^\d*$/.test(v) || v === '' || parseInt(v) === 0 || parseInt(v) > 4096) {
+                new Notification('twemoji-image-picker', {
+                    body: 'Invalid size value.',
+                    silent: true,
+                    icon: './assets/warning.png'
+                });
+            } else {
+                const size = parseInt(v);
+                const svgOptions = { width: size, height: size };
+                ipcRenderer.sendSync('download', el.src, svgOptions);
+
+                await sleep(0);
+                new Notification('twemoji-image-picker', {
+                    body: 'Copied PNG image to clipboard!',
+                    silent: true,
+                    icon: './assets/check.png'
+                });
+            }
+            hideLoading(el);
         });
     });
 }
