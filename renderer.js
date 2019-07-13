@@ -2,6 +2,7 @@
 
 const { ipcRenderer, remote } = require('electron');
 const emoji = require('emoji.json');
+const appName = require('./package.json').name;
 
 show();
 
@@ -47,7 +48,7 @@ function addEventlisteners() {
 
             const v = parseInt(document.getElementById('png-size-input').value);
             if (!/^\d*$/.test(v) || v === '' || parseInt(v) === 0 || parseInt(v) > 4096) {
-                new Notification('twemoji-image-picker', {
+                new Notification(appName, {
                     body: 'Invalid size value.',
                     silent: true,
                     icon: './assets/warning.png'
@@ -58,7 +59,7 @@ function addEventlisteners() {
                 ipcRenderer.sendSync('download', el.src, svgOptions);
 
                 await sleep(0);
-                new Notification('twemoji-image-picker', {
+                new Notification(appName, {
                     body: 'Copied PNG image to clipboard!',
                     silent: true,
                     icon: './assets/check.png'
