@@ -19,12 +19,13 @@
   "dependencies": {
     "electron-dl": "^1.14.0",
     "emoji.json": "^12.1.0",
-    "svg2png": "^4.1.1"
+    "sharp": "^0.22.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
     "electron": "^5.0.6",
     "electron-packager": "^14.0.1",
+    "electron-rebuild": "^1.8.5",
     "eslint-plugin-eslint-comments": "^3.1.2"
   }
 }

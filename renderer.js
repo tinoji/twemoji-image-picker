@@ -55,8 +55,7 @@ function addEventlisteners() {
                 });
             } else {
                 const size = parseInt(v);
-                const svgOptions = { width: size, height: size };
-                ipcRenderer.sendSync('download', el.src, svgOptions);
+                ipcRenderer.sendSync('download', el.src, size);
 
                 await sleep(0);
                 new Notification(appName, {
