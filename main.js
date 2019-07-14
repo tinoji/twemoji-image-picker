@@ -9,10 +9,8 @@ const sharp = require('sharp');
 
 const tmpDir = os.tmpdir() + '/twemoji-image-picker';
 const svgFilename = 'twemoji.svg';
-const pngFilename = 'twemoji.png';
 const svgFilepath = tmpDir + '/' + svgFilename;
-const pngFilepath = tmpDir + '/' + pngFilename;
-const SvgSize = 36;
+const svgSize = 36;
 const defaultSvgDpi = 72;
 
 let mainWindow;
@@ -20,11 +18,11 @@ let mainWindow;
 function createWindow() {
     mainWindow = new BrowserWindow({
         webPreferences: { nodeIntegration: true },
-        // width: 302,
-        // height: 386,
+        width: 302,
+        height: 386,
 
-        width: 900,
-        height: 900,
+        // width: 900,
+        // height: 900,
 
         transparent: true,
         frame: false,
@@ -37,7 +35,7 @@ function createWindow() {
         slashes: true
     }));
 
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
     Menu.setApplicationMenu(null);
 
@@ -67,16 +65,23 @@ ipcMain.on('download', async (event, url, size) => {
         filename: svgFilename
     });
 
-    // See: https://github.com/lovell/sharp/issues/729
-    let density = parseInt(defaultSvgDpi * size / SvgSize);
-    if (density > 2400) density = 2400;
-    await sharp(svgFilepath, { density: density })
-        .resize(size, size)
-        .png()
-        .toFile(pngFilepath);
+    let img;
+    if (process.platform == 'win32' || process.platform == 'win64') {
+        // See: https://github.com/electron/electron/issues/17081
+        img = nativeImage.createFromPath(svgFilepath)
+    } else {
+        // See: https://github.com/lovell/sharp/issues/729
+        let density = parseInt(defaultSvgDpi * size / svgSize);
+        if (density > 2400) density = 2400;
 
-    const img = nativeImage.createFromPath(pngFilepath);
+        const buffer = await sharp(svgFilepath, { density: density })
+            .resize(size, size)
+            .png()
+            .toBuffer()
+
+        img = nativeImage.createFromBuffer(buffer)
+    }
+
     clipboard.writeImage(img);
-
     event.returnValue = 'pong';
 });
