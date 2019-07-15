@@ -21,10 +21,6 @@ function createWindow() {
             webPreferences: { nodeIntegration: true },
             width: 302,
             height: 386,
-
-            // width: 900,
-            // height: 900,
-
             transparent: true,
             frame: false,
             icon: path.join(__dirname, 'icon/icon.icns')
@@ -34,9 +30,6 @@ function createWindow() {
             webPreferences: { nodeIntegration: true },
             width: 300,
             height: 386,
- 
-            // width: 900,
-            // height: 900,
         });
     }
 
@@ -45,8 +38,6 @@ function createWindow() {
         protocol: 'file:',
         slashes: true
     }));
-
-    // mainWindow.webContents.openDevTools();
 
     Menu.setApplicationMenu(null);
 

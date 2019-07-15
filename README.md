@@ -1,6 +1,6 @@
 # twemoji-image-picker
 
-![demo](https://user-images.githubusercontent.com/10938548/61174002-a2d50f80-a5d5-11e9-91be-09242b2e8070.gif)
+![demo](https://user-images.githubusercontent.com/10938548/61218291-ab038b00-a74c-11e9-853d-b3064ef81d22.gif)
 
 <br>
 
@@ -19,9 +19,16 @@ Download one that suit to your platform from [Releases](https://github.com/tinoj
 
 <br>
 
+## Notes
+- **Only Mac version has been verified.**
+  - Windows and Linux version maybe don't work well :pray: 
+- The file format depends on platforms.
+  - Mac/Linux: PNG
+  - Windows: SVG 
+
+<br>
+
 ## Not Supported
-- For Windows
-  - Not verification yet. Comming soon.
 - Category and Frequentry used feature
   - Not necessary for me :wink:
 - Surrogate pair emoji
