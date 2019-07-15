@@ -18,7 +18,7 @@
                "."
            ],
            "windows": {
-               "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
+               "runtimeExecutable": "${env:HOMEPATH}/AppData/Roaming/npm/electron.cmd"
            },
            "console":"integratedTerminal",
         }

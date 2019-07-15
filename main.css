@@ -23,10 +23,6 @@ body {
     z-index: 5;
 }
 
-.win .title-bar {
-    display: none;
-}
-
 #close-btn {
     margin: 7px;
     height: 14px;
@@ -50,10 +46,6 @@ body {
 .main-container {
     width: 100%;
     margin: 32px 6px 0 6px;
-}
-
-.win .main-container {
-    margin: 8px 6px 0 6px;
 }
 
 input {
@@ -98,6 +90,27 @@ img.emoji {
 img.emoji:hover {
     background-color: #c0c0c0;
     border-radius: 0.3em;
+}
+
+/* Windows */
+.win .title-bar {
+    display: none;
+}
+
+.win .main-container {
+    margin: 8px 6px 0 6px;
+}
+
+.win #search-input {
+    width: 92%;
+}
+
+.win #png-size-input {
+    display: none;
+}
+
+.win #png-size-unit {
+    display: none;
 }
 
 /* loading spinner

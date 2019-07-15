@@ -32,9 +32,10 @@ function createWindow() {
     } else {
         mainWindow = new BrowserWindow({
             webPreferences: { nodeIntegration: true },
-            width: 302,
-            height: 386
-
+            width: 300,
+            height: 386,
+            icon: path.join(__dirname, 'icon/icon.icns')
+ 
             // width: 900,
             // height: 900,
         });
