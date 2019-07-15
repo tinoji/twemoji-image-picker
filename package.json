@@ -2,7 +2,7 @@
   "name": "twemoji-image-picker",
   "version": "1.0.0",
   "description": "Twitter emoji image picker on desktop",
-  "main": "main.js",
+  "main": "build/index.js",
   "scripts": {
     "eslint": "eslint .",
     "start": "electron .",
@@ -13,7 +13,7 @@
     "mac": {
       "category": "public.app-category.utilities",
       "target": "default",
-      "icon": "build/icon.icns"
+      "icon": "icons/icon.icns"
     },
     "win": {
       "target": "nsis"
@@ -21,20 +21,30 @@
   },
   "keywords": [
     "emoji",
+    "keyboard",
     "picker",
     "electron"
   ],
   "author": "Hiroaki Kikuchi (https://github.com/tinoji)",
   "license": "MIT",
   "dependencies": {
+    "@types/sharp": "^0.22.2",
+    "awesome-typescript-loader": "^5.2.1",
     "electron-dl": "^1.14.0",
     "emoji.json": "^12.1.0",
-    "sharp": "^0.22.1"
+    "source-map-loader": "^0.2.4",
+    "twemoji": "^12.1.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
     "electron": "^5.0.6",
     "electron-builder": "^21.0.15",
-    "eslint-plugin-eslint-comments": "^3.1.2"
+    "electron-rebuild": "^1.8.5",
+    "eslint-plugin-eslint-comments": "^3.1.2",
+    "ts-loader": "^6.0.4",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6"
   }
 }

@@ -67,5 +67,9 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# dist
+# dist of electron app
 dist/
+
+# ts file build by webpack
+build/renderer/
+build/index.js
