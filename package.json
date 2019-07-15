@@ -10,6 +10,9 @@
   },
   "build": {
     "appId": "com.ketsuago.twemoji-image-picker",
+    "files": [
+      "./build/**/*"
+    ],
     "mac": {
       "category": "public.app-category.utilities",
       "target": "default",

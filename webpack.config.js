@@ -27,6 +27,7 @@ var main = {
             test: /.ts?$/,
             include: [
                 path.resolve(__dirname, 'src'),
+                // path.resolve(__dirname, 'node_modules'),
             ],
             exclude: [
                 path.resolve(__dirname, 'node_modules'),
