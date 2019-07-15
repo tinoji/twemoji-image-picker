@@ -6,8 +6,18 @@
   "scripts": {
     "eslint": "eslint .",
     "start": "electron .",
-    "build-mac": "electron-packager . twemoji-image-picker --platform=darwin --arch=x64 --icon=icon/icon.icns --overwrite --out dist",
-    "build-win": "electron-packager . twemoji-image-picker --platform=win32 --arch=x64 --icon=icon/icon.icns --overwrite --out dist"
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.ketsuago.twemoji-image-picker",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "default",
+      "icon": "build/icon.icns"
+    },
+    "win": {
+      "target": "nsis"
+    }
   },
   "keywords": [
     "emoji",
@@ -24,8 +34,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.2",
     "electron": "^5.0.6",
-    "electron-packager": "^14.0.1",
-    "electron-rebuild": "^1.8.5",
+    "electron-builder": "^21.0.15",
     "eslint-plugin-eslint-comments": "^3.1.2"
   }
 }

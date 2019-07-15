@@ -79,7 +79,7 @@ ipcMain.on('download', async (event, url, size) => {
     let img;
     if (process.platform === 'win32' || process.platform === 'win64') {
         // See: https://github.com/electron/electron/issues/17081
-        img = nativeImage.createFromPath(svgFilepath)
+        img = nativeImage.createFromPath(svgFilepath);
     } else {
         // See: https://github.com/lovell/sharp/issues/729
         let density = parseInt(defaultSvgDpi * size / svgSize);
@@ -88,9 +88,9 @@ ipcMain.on('download', async (event, url, size) => {
         const buffer = await sharp(svgFilepath, { density: density })
             .resize(size, size)
             .png()
-            .toBuffer()
+            .toBuffer();
 
-        img = nativeImage.createFromBuffer(buffer)
+        img = nativeImage.createFromBuffer(buffer);
     }
 
     clipboard.writeImage(img);
