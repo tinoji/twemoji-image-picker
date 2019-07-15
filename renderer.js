@@ -24,7 +24,7 @@ function show() {
         .filter((el) => (el['codes'].match(/ /) == null)) // exclude surrogate pair
         .filter((el) => el['name'].match(regex) != null)
         .map((el) => {
-            let dom = document.createElement('SPAN');
+            let dom = document.createElement('span');
             dom.textContent = twemoji.convert.fromCodePoint(el['codes']);
             dom.title = el['name'];
             contents.appendChild(dom);

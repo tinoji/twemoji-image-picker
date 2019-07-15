@@ -16,18 +16,29 @@ const defaultSvgDpi = 72;
 let mainWindow;
 
 function createWindow() {
-    mainWindow = new BrowserWindow({
-        webPreferences: { nodeIntegration: true },
-        width: 302,
-        height: 386,
+    if (process.platform == 'darwin') {
+        mainWindow = new BrowserWindow({
+            webPreferences: { nodeIntegration: true },
+            width: 302,
+            height: 386,
 
-        // width: 900,
-        // height: 900,
+            // width: 900,
+            // height: 900,
 
-        transparent: true,
-        frame: false,
-        icon: path.join(__dirname, 'icon/icon.icns')
-    });
+            transparent: true,
+            frame: false,
+            icon: path.join(__dirname, 'icon/icon.icns')
+        });
+    } else {
+        mainWindow = new BrowserWindow({
+            webPreferences: { nodeIntegration: true },
+            width: 302,
+            height: 386
+
+            // width: 900,
+            // height: 900,
+        });
+    }
 
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
@@ -66,7 +77,7 @@ ipcMain.on('download', async (event, url, size) => {
     });
 
     let img;
-    if (process.platform == 'win32' || process.platform == 'win64') {
+    if (process.platform === 'win32' || process.platform === 'win64') {
         // See: https://github.com/electron/electron/issues/17081
         img = nativeImage.createFromPath(svgFilepath)
     } else {
