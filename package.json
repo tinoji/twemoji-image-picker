@@ -27,14 +27,14 @@
   "author": "Hiroaki Kikuchi (https://github.com/tinoji)",
   "license": "MIT",
   "dependencies": {
-    "electron-dl": "^1.14.0",
-    "emoji.json": "^12.1.0",
-    "sharp": "^0.22.1"
+    "electron-dl": "^3.0.0",
+    "emoji.json": "^12.1.1",
+    "sharp": "^0.25.1"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.2",
-    "electron": "^5.0.6",
-    "electron-builder": "^21.0.15",
+    "babel-eslint": "^10.1.0",
+    "electron": "^8.1.0",
+    "electron-builder": "^22.4.0",
     "eslint-plugin-eslint-comments": "^3.1.2"
   }
 }
