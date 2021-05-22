@@ -18,7 +18,11 @@ let mainWindow;
 function createWindow() {
     if (process.platform == 'darwin') {
         mainWindow = new BrowserWindow({
-            webPreferences: { nodeIntegration: true },
+            webPreferences: {
+                nodeIntegration: true,
+                contextIsolation: false,
+                enableRemoteModule: true
+            },
             width: 302,
             height: 386,
             transparent: true,
@@ -27,7 +31,11 @@ function createWindow() {
         });
     } else {
         mainWindow = new BrowserWindow({
-            webPreferences: { nodeIntegration: true },
+            webPreferences: {
+                nodeIntegration: true,
+                contextIsolation: false,
+                enableRemoteModule: true
+            },
             width: 300,
             height: 386,
         });
