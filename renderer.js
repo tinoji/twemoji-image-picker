@@ -1,17 +1,12 @@
 'use strict';
 
-const { ipcRenderer, remote } = require('electron');
-const emoji = require('emoji.json');
-const appName = require('./package.json').name;
-
 show();
 
 document.getElementById('close-btn').addEventListener('click', () => {
-    let window = remote.getCurrentWindow();
-    window.close();
+    window.api.closeWindow();
 });
 
-function show() {
+async function show() {
     let contents = document.getElementById('contents');
     while (contents.firstChild) {
         contents.removeChild(contents.firstChild);
@@ -20,15 +15,13 @@ function show() {
     const query = document.getElementById('search-input');
     const regex = new RegExp(query.value);
 
-    emoji
-        .filter((el) => (el['codes'].match(/ /) == null)) // exclude surrogate pair
-        .filter((el) => el['name'].match(regex) != null)
-        .map((el) => {
-            let dom = document.createElement('span');
-            dom.textContent = twemoji.convert.fromCodePoint(el['codes']);
-            dom.title = el['name'];
-            contents.appendChild(dom);
-        });
+    const filtered = await window.api.filterEmoji(regex);
+    filtered.map((el) => {
+        let dom = document.createElement('span');
+        dom.textContent = twemoji.convert.fromCodePoint(el['codes']);
+        dom.title = el['name'];
+        contents.appendChild(dom);
+    });
 
     twemoji.parse(contents, {
         folder: 'svg',
@@ -48,21 +41,12 @@ function addEventlisteners() {
 
             const v = parseInt(document.getElementById('png-size-input').value);
             if (!/^\d*$/.test(v) || v === '' || parseInt(v) === 0 || parseInt(v) > 4096) {
-                new Notification(appName, {
-                    body: 'Invalid size value.',
-                    silent: true,
-                    icon: './assets/warning.png'
-                });
+                window.api.notifyError('Invalid size value.');
             } else {
                 const size = parseInt(v);
-                ipcRenderer.sendSync('download', el.src, size);
-
+                window.api.download(el.src, size);
                 await sleep(0);
-                new Notification(appName, {
-                    body: 'Copied PNG image to clipboard!',
-                    silent: true,
-                    icon: './assets/check.png'
-                });
+                window.api.notifySuccess('Copied PNG image to clipboard!');
             }
             hideLoading(el);
         });

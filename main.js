@@ -1,13 +1,15 @@
 'use strict';
 
-const { app, Menu, BrowserWindow, ipcMain, nativeImage, clipboard } = require('electron');
+const { app, Menu, BrowserWindow, ipcMain, nativeImage, clipboard, Notification } = require('electron');
 const { download } = require('electron-dl');
+const appName = require('./package.json').name;
+const emoji = require('emoji.json');
 const path = require('path');
 const os = require('os');
 const url = require('url');
 const sharp = require('sharp');
 
-const tmpDir = os.tmpdir() + '/twemoji-image-picker';
+const tmpDir = `${os.tmpdir()}/${appName}`;
 const svgFilename = 'twemoji.svg';
 const svgFilepath = tmpDir + '/' + svgFilename;
 const svgSize = 36;
@@ -19,9 +21,10 @@ function createWindow() {
     if (process.platform == 'darwin') {
         mainWindow = new BrowserWindow({
             webPreferences: {
-                nodeIntegration: true,
-                contextIsolation: false,
-                enableRemoteModule: true
+                nodeIntegration: false,
+                contextIsolation: true,
+                worldSafeExecuteJavaScript: true,
+                preload: path.join(__dirname, 'preload.js')
             },
             width: 302,
             height: 386,
@@ -32,9 +35,10 @@ function createWindow() {
     } else {
         mainWindow = new BrowserWindow({
             webPreferences: {
-                nodeIntegration: true,
-                contextIsolation: false,
-                enableRemoteModule: true
+                nodeIntegration: false,
+                contextIsolation: true,
+                worldSafeExecuteJavaScript: true,
+                preload: path.join(__dirname, 'preload.js')
             },
             width: 300,
             height: 386,
@@ -71,7 +75,7 @@ app.on('activate', () => {
     }
 });
 
-ipcMain.on('download', async (event, url, size) => {
+ipcMain.handle('download', async (event, url, size) => {
     const win = BrowserWindow.getFocusedWindow();
     await download(win, url, {
         directory: tmpDir,
@@ -97,4 +101,31 @@ ipcMain.on('download', async (event, url, size) => {
 
     clipboard.writeImage(img);
     event.returnValue = 'pong';
+});
+
+ipcMain.handle('closeWindow', () => {
+    mainWindow.close();
+});
+
+ipcMain.handle('filterEmoji', (_, regex) => {
+    return emoji.filter((el) => el['codes'].match(/ /) == null) // exclude surrogate pair
+                .filter((el) => el['name'].match(regex) != null);
+});
+
+ipcMain.handle('notifySuccess', (_, message) => {
+    const notification = {
+        title: appName,
+        body: message,
+        icon: './assets/check.png'
+    };
+    new Notification(notification).show();
+});
+
+ipcMain.handle('notifyError', (_, message) => {
+    const notification = {
+        title: appName,
+        body: message,
+        icon: './assets/warning.png'
+    };
+    new Notification(notification).show();
 });
