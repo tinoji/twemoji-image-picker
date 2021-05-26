@@ -37,8 +37,6 @@ function addEventlisteners() {
         el.addEventListener('click', (e) => {
             e.preventDefault();
 
-            console.log(e.target.alt);
-
             // prevent repeated clicks
             let container = document.querySelector('.main-container');
             container.style['pointer-events'] = 'none';
