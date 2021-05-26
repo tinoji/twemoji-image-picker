@@ -1,10 +1,21 @@
 {
   "name": "twemoji-image-picker",
-  "version": "1.0.0",
+  "version": "1.2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinoji/twemoji-image-picker.git"
+  },
   "description": "Twitter emoji image picker on desktop",
-  "main": "main.js",
+  "author": "Hiroaki Kikuchi (https://github.com/tinoji)",
+  "license": "MIT",
+  "keywords": [
+    "emoji",
+    "picker",
+    "electron"
+  ],
+  "main": "src/main.js",
   "scripts": {
-    "eslint": "eslint .",
+    "eslint": "eslint ./src",
     "start": "electron .",
     "build": "electron-builder"
   },
@@ -19,22 +30,16 @@
       "target": "nsis"
     }
   },
-  "keywords": [
-    "emoji",
-    "picker",
-    "electron"
-  ],
-  "author": "Hiroaki Kikuchi (https://github.com/tinoji)",
-  "license": "MIT",
   "dependencies": {
-    "electron-dl": "^3.0.0",
-    "emoji.json": "^12.1.1",
-    "sharp": "^0.25.1"
+    "electron-dl": "^3.2.1",
+    "emoji.json": "^13.1.0",
+    "sharp": "^0.28.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "electron": "^9.4.0",
-    "electron-builder": "^22.4.0",
-    "eslint-plugin-eslint-comments": "^3.1.2"
+    "electron": "^12.0.9",
+    "electron-builder": "^22.10.5",
+    "eslint": "^7.27.0",
+    "eslint-plugin-eslint-comments": "^3.2.0"
   }
 }
