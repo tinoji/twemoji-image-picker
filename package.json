@@ -15,7 +15,7 @@
   ],
   "main": "src/main.js",
   "scripts": {
-    "eslint": "eslint .",
+    "eslint": "eslint ./src",
     "start": "electron .",
     "build": "electron-builder"
   },
