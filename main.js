@@ -7,13 +7,13 @@ const emoji = require('emoji.json');
 const path = require('path');
 const os = require('os');
 const url = require('url');
+const fs = require('fs');
 const sharp = require('sharp');
 
-const tmpDir = `${os.tmpdir()}/${appName}`;
-const svgFilename = 'twemoji.svg';
-const svgFilepath = tmpDir + '/' + svgFilename;
+const tmpDir = path.join(os.tmpdir(), appName);
 const svgSize = 36;
 const defaultSvgDpi = 72;
+let downloadCount = 0;
 
 let mainWindow;
 
@@ -61,13 +61,22 @@ function createWindow() {
     });
 }
 
-app.on('ready', createWindow);
+function clearTmpDir() {
+    fs.readdir(tmpDir, (err, files) => {
+        if (err) {
+            throw err;
+        }
+        files.forEach((file) => {
+            fs.unlink(path.join(tmpDir, file), (err) => {
+                if (err) {
+                    throw (err);
+                }
+            });
+        });
+    });
+}
 
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
+app.on('ready', createWindow);
 
 app.on('activate', () => {
     if (mainWindow === null) {
@@ -75,7 +84,23 @@ app.on('activate', () => {
     }
 });
 
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
+
+app.on('quit', () => {
+    clearTmpDir();
+});
+
 ipcMain.handle('download', async (event, url, size) => {
+    // FIXME: too ugly hack...
+    // Using the same file path cause the file to not load into the buffer correctly.
+    const svgFilename = `${downloadCount}.svg`;
+    downloadCount++;
+    const svgFilepath = path.join(tmpDir, svgFilename);
+
     const win = BrowserWindow.getFocusedWindow();
     await download(win, url, {
         directory: tmpDir,
