@@ -2,7 +2,7 @@
 
 const { app, Menu, BrowserWindow, ipcMain, nativeImage, clipboard, Notification } = require('electron');
 const { download } = require('electron-dl');
-const appName = require('./package.json').name;
+const appName = require('../package.json').name;
 const emoji = require('emoji.json');
 const path = require('path');
 const os = require('os');
@@ -58,6 +58,7 @@ function createWindow() {
 
     mainWindow.on('closed', () => {
         mainWindow = null;
+        // clearTmpDir();
     });
 }
 
@@ -85,12 +86,14 @@ app.on('activate', () => {
 });
 
 app.on('window-all-closed', () => {
+    clearTmpDir();
+
     if (process.platform !== 'darwin') {
         app.quit();
     }
 });
 
-app.on('quit', () => {
+app.on('will-quit', () => {
     clearTmpDir();
 });
 

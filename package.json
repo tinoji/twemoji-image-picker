@@ -1,8 +1,19 @@
 {
   "name": "twemoji-image-picker",
   "version": "1.2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinoji/twemoji-image-picker.git"
+  },
   "description": "Twitter emoji image picker on desktop",
-  "main": "main.js",
+  "author": "Hiroaki Kikuchi (https://github.com/tinoji)",
+  "license": "MIT",
+  "keywords": [
+    "emoji",
+    "picker",
+    "electron"
+  ],
+  "main": "src/main.js",
   "scripts": {
     "eslint": "eslint .",
     "start": "electron .",
@@ -19,13 +30,6 @@
       "target": "nsis"
     }
   },
-  "keywords": [
-    "emoji",
-    "picker",
-    "electron"
-  ],
-  "author": "Hiroaki Kikuchi (https://github.com/tinoji)",
-  "license": "MIT",
   "dependencies": {
     "electron-dl": "^3.2.1",
     "emoji.json": "^13.1.0",
